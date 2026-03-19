@@ -17,11 +17,12 @@ To account for this, 15% of the time (or also when there are no outbound links),
 
 The "matrix_pagerank.py" is the real method which PageRank uses. This is because random walks through the network are highly inefficient, taking lots of iterations and are not always accurate.
 In this file, we compile all possible transitions from one webpage to another webpage into a square matrix. This is the Markov Chain State Transition Matrix. I used a sparse matrix purely because it is more efficient for large matrices.
-To account for echo chambers, we use a "dampening factor" or "jump" which is typically around 85%, 15% (as used in Monte Carlo simulation earlier).
+To account for echo chambers, and cases where there are no outbound links/edges, we use a "dampening factor" (a) which is typically around 85% (as used in Monte Carlo simulation earlier).
 
 We represent this with a formula:
 
 a = 0.85
+
 Google matrix = a*(Transition Matrix) + (1-a)/Size of Matrix * (Matrix of all ones)
 
 For Markov Chains like this, when this matrix is raised to a large power n, each row in the Markov Chain will eventually converge to an identical row vector. This is the stationary distribution, and represents the probability of a random user finding themselves on this webpage at any point in time during their "infinitely long crawl through the network". The higher the probability, the more important the page.

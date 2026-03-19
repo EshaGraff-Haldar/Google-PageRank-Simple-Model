@@ -1,11 +1,14 @@
 import numpy as np
 from numpy.linalg import eig
 from scipy import sparse
+import os
 
 #creating transition dictionary
 nodes = set()
 num_of_lines = 0
-with open("/Users/eshagraffhaldar/Library/Mobile Documents/com~apple~CloudDocs/KC/Google PageRank/web-Google.txt") as sample_data:
+
+cwd = os.getcwd()
+with open(cwd+"/web-Google.txt") as sample_data:
     probs = {}
     for line in sample_data:
         if line.startswith("#"): continue
